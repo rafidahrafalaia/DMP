@@ -10,7 +10,6 @@ const Jobs = () => {
   const [session, setSession] = useState(window.sessionStorage.getItem("session"));
 
   useEffect(() => {
-    // setSession(window.sessionStorage.getItem("session"));
     if (!session) {
       navigate("/");
     }

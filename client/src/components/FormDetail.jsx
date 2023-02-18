@@ -10,10 +10,10 @@ const FormDetailJob = () => {
   const [location, setLocation] = useState("");
   const [msg, setMsg] = useState("");
   const { id } = useParams();
-  const [session, setSession] = useState(null);
+  const [session, setSession] = useState((window.sessionStorage.getItem("session")));
 
   useEffect(() => {
-    setSession(window.sessionStorage.getItem("session"));
+    
     const getJobById = async () => {
       try {
         const response = await axios.get(
