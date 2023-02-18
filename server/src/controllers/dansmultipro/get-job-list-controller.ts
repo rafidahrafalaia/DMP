@@ -10,8 +10,8 @@ const getListJobs = async (req : Request, res : Response) => {
 
     const queries: any = {
         page: Number(query.page) || 1,
-        description: query.description?.toString() || '',
-        location: query.location?.toString() || '',
+        description: (query.description?.toString())?.toLowerCase() || '',
+        location: (query.location?.toString())?.toLowerCase() || '',
     };
 
 
