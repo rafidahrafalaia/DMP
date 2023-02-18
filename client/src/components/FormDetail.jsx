@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const FormDetailJob = () => {
@@ -11,18 +10,17 @@ const FormDetailJob = () => {
   const [location, setLocation] = useState("");
   const [msg, setMsg] = useState("");
   const { id } = useParams();
-  const { user } = useSelector(
-    (state) => state.auth
-  );
+  const [session, setSession] = useState(null);
 
   useEffect(() => {
+    setSession(window.sessionStorage.getItem("session"));
     const getJobById = async () => {
       try {
         const response = await axios.get(
           `http://localhost:9090/api/job/${id}`,
           {
             headers: {
-            'authorization': `Bearer ${user?.accessToken}`
+            'authorization': `Bearer ${session}`
           }
         }
         );

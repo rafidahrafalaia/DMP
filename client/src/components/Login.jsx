@@ -14,6 +14,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user || isSuccess) {
+      window.sessionStorage.setItem("session", user?.accessToken);
       navigate("/jobs");
     }
   }, [user, isSuccess, dispatch, navigate]);

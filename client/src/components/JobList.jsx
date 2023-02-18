@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import axios from "axios";
 
 const JobList = () => {
@@ -9,10 +8,8 @@ const JobList = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-  const { user } = useSelector(
-    (state) => state.auth
-  );
-  
+  const [session, setSession] = useState(window.sessionStorage.getItem("session"));
+
   useEffect(() => {
     getJobs();
   }, []);
@@ -42,7 +39,7 @@ const JobList = () => {
     const response = await axios.get(`http://localhost:9090/api/jobs?page=${page}&location=${location}&description=${description}&full_time=${isChecked}`,
       {
         headers: {
-        'authorization': `Bearer ${user?.accessToken}`
+        'authorization': `Bearer ${session}`
       }
     });
     setJobs(response.data.data);
